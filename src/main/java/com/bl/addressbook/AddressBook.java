@@ -257,4 +257,18 @@ public class AddressBook {
             System.out.println("Failed to update !");
         }
     }
+
+    public void deleteContact(Connection connection)throws SQLException{
+        String deleteQuery = "delete from contact_details where first_name = ?";
+        preparedStatement = connection.prepareStatement(deleteQuery);
+        System.out.println("Enter Contact name : ");
+        String firstName = scanner.next();
+        preparedStatement.setString(1,firstName);
+        int result = preparedStatement.executeUpdate();
+        if(result != 0){
+            System.out.println("Contact Deleted Successfully !");
+        } else {
+            System.out.println("Contact Deletion Failed !");
+        }
+    }
 }

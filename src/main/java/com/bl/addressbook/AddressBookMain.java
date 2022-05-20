@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 /**
- * Program to edit existing contact person using their name.
+ * Program to delete existing contact person using their name.
  *
  * @author : Snehal Patil.
  */
@@ -36,7 +36,7 @@ public class AddressBookMain {
             do {
                 System.out.println("Select the operation you want to perform : ");
                 System.out.println(
-                        "1.Create table \n2.Add contact \n3.Edit Contact \n4.Exit Address book System ");
+                        "1.Create table \n2.Add contact \n3.Edit Contact \n4.Delete Contact \n5.Exit Address book System ");
                 String choice = scanner.next();
                 switch (choice) {
                     case "1":
@@ -49,6 +49,9 @@ public class AddressBookMain {
                         addressBook.editContact(connection);
                         break;
                     case "4":
+                        addressBook.deleteContact(connection);
+                        break;
+                    case "5":
                         flag = false;
                         System.out.println("Thank You !! ");
                         break;
