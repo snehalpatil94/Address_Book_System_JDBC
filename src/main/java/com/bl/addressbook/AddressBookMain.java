@@ -4,14 +4,14 @@ import java.sql.*;
 import java.util.Scanner;
 
 /**
- * Program to add a new Contact to Address Book
+ * Program to edit existing contact person using their name.
  *
  * @author : Snehal Patil.
  */
 
 public class AddressBookMain {
     public static void main(String[] args) throws Exception {
-        System.out.println("----------- Welcome to address book program ☺ -------------");
+        System.out.println("----------- Welcome to address book program ☺ -------------\n");
 
         AddressBookMain addressBookMain = new AddressBookMain();
 
@@ -32,23 +32,30 @@ public class AddressBookMain {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/address_book_system", "root", "Mysqlpassword@1");
             AddressBook addressBook = new AddressBook();
-            boolean change = true;
+            boolean flag = true;
             do {
-                System.out.println("\n Select the operation you want to perform : ");
+                System.out.println("Select the operation you want to perform : ");
                 System.out.println(
-                        "1.Create table\n2.Add contact\n3.Exit Address book System");
-                switch (scanner.nextInt()) {
-                    case 1:
+                        "1.Create table \n2.Add contact \n3.Edit Contact \n4.Exit Address book System ");
+                String choice = scanner.next();
+                switch (choice) {
+                    case "1":
                         addressBook.createTable(connection);
                         break;
-                    case 2:
+                    case "2":
                         addressBook.addContact(connection);
                         break;
+                    case "3":
+                        addressBook.editContact(connection);
+                        break;
+                    case "4":
+                        flag = false;
+                        System.out.println("Thank You !! ");
+                        break;
                     default:
-                        change = false;
-                        System.out.println("Exiting Address Book... ");
+                        System.out.println("Enter Valid Option !");
                 }
-            } while (change);
+            } while (flag);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
